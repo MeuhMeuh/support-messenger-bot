@@ -1,3 +1,5 @@
 vendor
 conf.json
 support-messenger-bot
+debug
+.vscode
