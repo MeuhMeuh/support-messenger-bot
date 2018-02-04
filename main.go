@@ -17,7 +17,7 @@ func main() {
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/facebook", getFacebookHandler(configuration)).Methods("POST").Methods("GET")
+	r.HandleFunc("/facebook", getFacebookHandler(configuration))
 
 	srv := &http.Server{
 		Handler:      r,
