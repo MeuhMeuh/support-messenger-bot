@@ -17,7 +17,7 @@ func main() {
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/facebook", getFacebookHandler(configuration))
+	r.HandleFunc("/webhook", getFacebookHandler(configuration))
 
 	srv := &http.Server{
 		Handler:      r,
