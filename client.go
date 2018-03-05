@@ -1,0 +1,30 @@
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"log"
+	"net/http"
+)
+
+// MessengerClient defines a client used to communicate with the Messenger API.
+type MessengerClient struct {
+	PageAccessToken string
+	Client          *http.Client
+}
+
+func createAPIClient(pageAccessToken string) *MessengerClient {
+	return &MessengerClient{
+		PageAccessToken: pageAccessToken,
+		Client:          &http.Client{},
+	}
+}
+
+func (client *MessengerClient) send(message []byte) (*http.Response, error) {
+	log.Println(fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", client.PageAccessToken))
+	return client.Client.Post(
+		fmt.Sprintf("https://graph.facebook.com/v2.6/me/messages?access_token=%s", client.PageAccessToken),
+		"application/json",
+		bytes.NewReader(message),
+	)
+}

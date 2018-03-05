@@ -33,6 +33,7 @@ func actionHandler(c *Configuration) func(http.ResponseWriter, *http.Request) {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
+
 		decoder := json.NewDecoder(r.Body)
 		var t ActionPayload
 		err := decoder.Decode(&t)
@@ -41,12 +42,28 @@ func actionHandler(c *Configuration) func(http.ResponseWriter, *http.Request) {
 		}
 		defer r.Body.Close()
 
-		log.Println(t)
-
 		if t.Object == "page" {
-			log.Println(t.Entry)
+			for _, entry := range t.Entry {
+				log.Println(entry.Messaging[0].Sender.ID)
+				message := &BasicMessage{
+					MessagingType: "RESPONSE",
+					Recipient: &Recipient{
+						ID: entry.Messaging[0].Sender.ID,
+					},
+					Message: &SendMessage{
+						Text: "Hey coucou toi !",
+					},
+				}
+
+				json, err := json.Marshal(message)
+				if err != nil {
+					panic(err)
+				}
+				log.Println(json)
+				createAPIClient(c.PageAccessToken).send(json)
+			}
 		}
 
-		w.Write([]byte("OK POST"))
+		w.Write([]byte("EVENT_RECEIVED"))
 	}
 }

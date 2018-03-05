@@ -7,8 +7,9 @@ import (
 
 // Configuration handles the whole configuration of the project.
 type Configuration struct {
-	Token     string `json:"token"`
-	AppSecret string `json:"appSecret"`
+	Token           string `json:"token"`
+	AppSecret       string `json:"appSecret"`
+	PageAccessToken string `json:"pageAccessToken"`
 }
 
 func getConfiguration() (*Configuration, error) {

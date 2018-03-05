@@ -24,10 +24,22 @@ type ActionPayload struct {
 	Object string `json:"object"`
 	Entry  []struct {
 		Messaging []struct {
-			Sender    Sender    `json:"sender"`
-			Recipient Recipient `json:"recipient"`
-			Timestamp int64     `json:"timestamp"`
-			Message   Message   `json:"message"`
+			Sender    *Sender    `json:"sender"`
+			Recipient *Recipient `json:"recipient"`
+			Timestamp int64      `json:"timestamp"`
+			Message   *Message   `json:"message"`
 		} `json:"messaging"`
 	} `json:"entry"`
+}
+
+// SendMessage is the tiniest representation of a message to be sent.
+type SendMessage struct {
+	Text string `json:"text"`
+}
+
+// BasicMessage is intended to define a message to be sent via the Messenger API.
+type BasicMessage struct {
+	MessagingType string       `json:"messaging_type"`
+	Recipient     *Recipient   `json:"recipient"`
+	Message       *SendMessage `json:"message"`
 }
