@@ -46,7 +46,6 @@ func actionHandler(c *Configuration) func(http.ResponseWriter, *http.Request) {
 
 		if t.Object == "page" {
 			for _, entry := range t.Entry {
-				log.Println(entry.Messaging[0].Sender.ID)
 				message := &BasicMessage{
 					MessagingType: "RESPONSE",
 					Recipient: &Recipient{

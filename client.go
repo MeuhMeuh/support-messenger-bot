@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 // MessengerClient defines a client used to communicate with the Messenger API.
@@ -15,7 +16,9 @@ type MessengerClient struct {
 func createAPIClient(pageAccessToken string) *MessengerClient {
 	return &MessengerClient{
 		PageAccessToken: pageAccessToken,
-		Client:          &http.Client{},
+		Client: &http.Client{
+			Timeout: time.Second * 20,
+		},
 	}
 }
 
