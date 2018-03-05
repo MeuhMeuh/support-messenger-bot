@@ -12,7 +12,6 @@ Please note that a ```conf.json``` file is required to make this work.
 
 # About it
 
-- Builds and run the bot server
 ```sh
 # Builds and run the bot server
 make start
