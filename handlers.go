@@ -42,6 +42,8 @@ func actionHandler(c *Configuration) func(http.ResponseWriter, *http.Request) {
 		}
 		defer r.Body.Close()
 
+		client := createAPIClient(c.PageAccessToken)
+
 		if t.Object == "page" {
 			for _, entry := range t.Entry {
 				log.Println(entry.Messaging[0].Sender.ID)
@@ -59,8 +61,7 @@ func actionHandler(c *Configuration) func(http.ResponseWriter, *http.Request) {
 				if err != nil {
 					panic(err)
 				}
-				log.Println(json)
-				createAPIClient(c.PageAccessToken).send(json)
+				client.send(json)
 			}
 		}
 
