@@ -9,3 +9,14 @@ Please note that a ```conf.json``` file is required to make this work.
     "pageAccessToken": "aPageAccessToken"
 }
 ```
+
+# About it
+
+- Builds and run the bot server
+```sh
+# Builds and run the bot server
+make start
+
+# Starts my ngrok for webhook tests purpose
+make ng
+```
